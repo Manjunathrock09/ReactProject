@@ -1,19 +1,46 @@
-import React from 'react';
+import React from "react";
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-      <div className="text-xl font-bold">WorkHub</div>
-      <nav>
-        <ul className="flex space-x-4">
-          <li><a href="#" className="hover:underline">Home</a></li>
-          <li><a href="#" className="hover:underline">About</a></li>
-          <li><a href="#" className="hover:underline">Services</a></li>
-          <li><a href="#" className="hover:underline">Contact</a></li>
-        </ul>
-      </nav>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Login</button>
-    </header>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <a className="navbar-brand" href="#">
+          WorkHub
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                About
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Services
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

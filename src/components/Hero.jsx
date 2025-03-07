@@ -2,9 +2,10 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="hero">
-      <h1>Welcome to WorkHub</h1>
-      <button>Get Started</button>
+    <section className="container text-center py-5">
+      <h1 className="display-4 fw-bold">Welcome to WorkHub</h1>
+      <p className="lead">Your best workspace solution.</p>
+      <button className="btn btn-success btn-lg">Get Started</button>
     </section>
   );
 };

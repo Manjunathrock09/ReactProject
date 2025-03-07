@@ -13,18 +13,20 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <section className="features">
-      <h2 className="features-title">Our Features</h2>
-      <div className="feature-list">
+    <section className="container py-5">
+      <h2 className="text-center text-primary mb-4">Our Features</h2>
+      <div className="row">
         {featuresData.map(feature => (
-          <div key={feature.id} className="feature-card">
-            <div className="feature-card-image">
-              <img src={feature.image} alt={feature.title} className="feature-image" />
-            </div>
-            <div className="feature-card-content">
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-              <a href="#" className="feature-link">Learn More →</a>
+          <div key={feature.id} className="col-md-6 col-lg-3 mb-4 d-flex">
+            <div className="card shadow-sm w-100">
+              <div className="ratio ratio-4x3">
+                <img src={feature.image} alt={feature.title} className="card-img-top img-fluid" />
+              </div>
+              <div className="card-body d-flex flex-column">
+                <h3 className="card-title h5">{feature.title}</h3>
+                <p className="card-text flex-grow-1">{feature.description}</p>
+                <a href="#" className="btn btn-primary mt-auto">Learn More →</a>
+              </div>
             </div>
           </div>
         ))}
