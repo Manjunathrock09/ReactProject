@@ -1,4 +1,5 @@
 import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 
 const featuresData = [
   { id: 1, title: "Office Space", description: "Choose from a range of office sizes and styles across 5 locations in Dublin City and Sandyford Business District.", image: "/images/office-space.jpg" },
@@ -13,23 +14,25 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <section className="container py-5">
-      <h2 className="text-center text-primary mb-4">Our Features</h2>
-      <div className="row">
-        {featuresData.map(feature => (
-          <div key={feature.id} className="col-md-6 col-lg-3 mb-4 d-flex">
-            <div className="card shadow-sm w-100">
-              <div className="ratio ratio-4x3">
-                <img src={feature.image} alt={feature.title} className="card-img-top img-fluid" />
-              </div>
-              <div className="card-body d-flex flex-column">
-                <h3 className="card-title h5">{feature.title}</h3>
-                <p className="card-text flex-grow-1">{feature.description}</p>
-                <a href="#" className="btn btn-primary mt-auto">Learn More →</a>
+    <section className="bg-dark py-5">
+      <div className="container">
+        <h2 className="text-center text-light mb-4">Our Features</h2>
+        <div className="row">
+          {featuresData.map(feature => (
+            <div key={feature.id} className="col-md-6 col-lg-3 mb-4 d-flex">
+              <div className="card shadow-lg w-100">
+                <div className="ratio ratio-4x3">
+                  <img src={feature.image} alt={feature.title} className="card-img-top img-fluid" />
+                </div>
+                <div className="card-body d-flex flex-column">
+                  <h3 className="card-title h5">{feature.title}</h3>
+                  <p className="card-text flex-grow-1">{feature.description}</p>
+                  <a href="#" className="btn btn-primary mt-auto">Learn More →</a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
