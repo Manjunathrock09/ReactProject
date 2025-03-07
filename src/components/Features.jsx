@@ -5,7 +5,9 @@ const featuresData = [
   { id: 3, title: "Co-working Spaces", description: "Flexible co-working spaces with high-speed internet, ergonomic furniture, and a collaborative environment.", image: "/images/coworking-space.jpg" },
   { id: 4, title: "Virtual Offices", description: "Get a prestigious business address, mail handling, and call forwarding services with our virtual office solutions.", image: "/images/virtual-office.jpg" },
   { id: 5, title: "Event Spaces", description: "Host workshops, conferences, and networking events in our well-equipped event spaces.", image: "/images/event-space.jpg" },
-  { id: 6, title: "Dedicated Desks", description: "Secure a dedicated desk in a shared workspace with storage options and 24/7 access.", image: "/images/dedicated-desk.jpg" }
+  { id: 6, title: "Dedicated Desks", description: "Secure a dedicated desk in a shared workspace with storage options and 24/7 access.", image: "/images/dedicated-desk.jpg" },
+  { id: 7, title: "Call Service", description: "Professional call answering and forwarding services to ensure you never miss an important call.", image: "/images/call-service.jpg" },
+  { id: 8, title: "Storage Solutions", description: "Secure, climate-controlled storage spaces for businesses and individuals to store important documents, equipment, or personal belongings.", image: "/images/storage-solutions.jpg" }
 ];
 
 const Features = () => {
