@@ -1,20 +1,25 @@
 import React from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
+import { Layout } from "antd";
+import Header from "./components/Header";  
+import Hero from "./components/Hero"; 
 import Features from "./components/Features";
-import Footer from "./components/Footer";
 import WhyWorkhub from "./components/WhyWorkhub";
+import Footer from "./components/Footer";
 
-function App() {
+const { Content } = Layout;
+
+const App = () => {
   return (
-    <div className="container-fluid p-0">
+    <Layout>
       <Header />
-      <Hero />
-      <Features />
-      <WhyWorkhub/>
+      <Content style={{ marginTop: "64px", padding: "20px" }}>
+        <Hero /> 
+        <Features />
+        <WhyWorkhub />
+      </Content>
       <Footer />
-    </div>
+    </Layout>
   );
-}
+};
 
 export default App;

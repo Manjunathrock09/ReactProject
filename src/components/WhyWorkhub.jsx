@@ -1,53 +1,64 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap Styles
-import "bootstrap-icons/font/bootstrap-icons.css"; // Bootstrap Icons
+import { Row, Col, Card, Typography } from 'antd';
+import { CustomerServiceOutlined, SwapOutlined, DollarOutlined, HistoryOutlined, BankOutlined, TrophyOutlined } from '@ant-design/icons';
+
+const { Title, Text } = Typography;
 
 const featuresData = [
-  { id: 1, title: "Customer support", description: "Our dedicated team provides support to clients every step of the way.", icon: "bi-headset" },
-  { id: 2, title: "Flexible", description: "Hassle-free cancellations and no long-term contracts.", icon: "bi-arrow-left-right" },
-  { id: 3, title: "Cost - saving", description: "Adds professionalism to your business without the big expense.", icon: "bi-cash-coin" },
-  { id: 4, title: "Immediate set up", description: "After submitting your details, you'll have instant use.", icon: "bi-clock-history" },
-  { id: 5, title: "Prestigious Locations", description: "Our virtual addresses and serviced offices are located at 5 prime Dublin locations, carefully selected for their prestigious postcodes.", icon: "bi-buildings" },
-  { id: 6, title: "High level of service", description: "Workhub offers a high level of service to all its clients. We are always on hand to help, whilst staying behind the scenes, allowing clients to dedicate their full attention to their business.", icon: "bi-award" }
+  { id: 1, title: "Customer support", description: "Our dedicated team provides support to clients every step of the way.", icon: <CustomerServiceOutlined style={{ fontSize: 32, color: "#D9534F" }} /> },
+  { id: 2, title: "Flexible", description: "Hassle-free cancellations and no long-term contracts.", icon: <SwapOutlined style={{ fontSize: 32, color: "#D9534F" }} /> },
+  { id: 3, title: "Cost-saving", description: "Adds professionalism to your business without the big expense.", icon: <DollarOutlined style={{ fontSize: 32, color: "#D9534F" }} /> },
+  { id: 4, title: "Immediate setup", description: "After submitting your details, you'll have instant use.", icon: <HistoryOutlined style={{ fontSize: 32, color: "#D9534F" }} /> },
+  { id: 5, title: "Prestigious Locations", description: "Our virtual addresses and serviced offices are located at 5 prime Dublin locations, carefully selected for their prestigious postcodes.", icon: <BankOutlined style={{ fontSize: 32, color: "#D9534F" }} /> },
+  { id: 6, title: "High level of service", description: "Workhub offers a high level of service to all its clients. We are always on hand to help, whilst staying behind the scenes, allowing clients to dedicate their full attention to their business.", icon: <TrophyOutlined style={{ fontSize: 32, color: "#D9534F" }} /> }
 ];
 
 const WhyWorkhub = () => {
   return (
-    <section className="pt-3 pb-5 bg-light"> {/* Reduced top padding */}
+    <section id="whyWorkhub" style={{ background: "#f8f9fa", padding: "60px 20px" }}> {/* Light background */}
       <div className="container">
-        <div className="row align-items-start"> {/* Changed align-items-center to start */}
+        <Row gutter={[32, 32]} align="top">
           
-          {/* Left Side - Text Content (Moved Higher) */}
-          <div className="col-lg-5 mb-3"> {/* Added margin-bottom for spacing */}
-            <h6 className="text-danger fw-semibold">WHY WORKHUB</h6>
-            <h2 className="fw-bold">We empower our clients' businesses.</h2>
-            <p className="text-secondary">
+          {/* Left Side - Text Content */}
+          <Col xs={24} md={10}>
+            <Title level={5} style={{ color: "#D9534F", fontWeight: "600" }}>WHY WORKHUB</Title>
+            <Title level={2} style={{ fontWeight: "bold" }}>We empower our clients' businesses.</Title>
+            <Text type="secondary">
               Our range of plans and services have been carefully developed to help clients run their businesses efficiently and cost-effectively.
-            </p>
-            <a href="#" className="text-dark fw-bold d-inline-flex align-items-center">
-              Our Company <span className="ms-1">&#8594;</span>
+            </Text>
+            <br /><br />
+            <a href="#" style={{ fontWeight: "bold", color: "#333", textDecoration: "none" }}>
+              Our Company <span style={{ marginLeft: "5px" }}>&#8594;</span>
             </a>
-          </div>
+          </Col>
 
           {/* Right Side - Features Grid */}
-          <div className="col-lg-7">
-            <div className="row row-cols-1 row-cols-md-2 g-4">
+          <Col xs={24} md={14}>
+            <Row gutter={[16, 16]}>
               {featuresData.map((feature) => (
-                <div key={feature.id} className="col d-flex flex-column align-items-center text-center">
-                  <div 
-                    className="border border-danger rounded-3 p-3 d-flex align-items-center justify-content-center"
-                    style={{ width: "90px", height: "90px", borderRadius: "12px", borderWidth: "2px" }}
-                  >
-                    <i className={`bi ${feature.icon} text-danger fs-2`}></i>
-                  </div>
-                  <h5 className="fw-bold mt-3">{feature.title}</h5>
-                  <p className="text-secondary">{feature.description}</p>
-                </div>
+                <Col xs={24} sm={12} key={feature.id}>
+                  <Card hoverable bordered style={{ textAlign: "center", padding: "20px" }}>
+                    <div style={{
+                      width: "90px",
+                      height: "90px",
+                      borderRadius: "12px",
+                      border: "2px solid #D9534F",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto 15px"
+                    }}>
+                      {feature.icon}
+                    </div>
+                    <Title level={5}>{feature.title}</Title>
+                    <Text type="secondary">{feature.description}</Text>
+                  </Card>
+                </Col>
               ))}
-            </div>
-          </div>
+            </Row>
+          </Col>
 
-        </div>
+        </Row>
       </div>
     </section>
   );
