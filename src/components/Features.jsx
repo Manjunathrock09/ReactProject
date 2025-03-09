@@ -14,7 +14,7 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <section className="bg-dark py-5">
+    <section className="bg-dark py-5" id='features'>
       <div className="container">
         <h2 className="text-center text-light mb-4">Our Features</h2>
         <div className="row">

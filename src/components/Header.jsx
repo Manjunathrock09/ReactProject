@@ -23,7 +23,6 @@ const AppHeader = () => {
         behavior: "smooth",
       });
 
-      // ✅ Properly remove hash from URL after scrolling
       setTimeout(() => {
         window.history.replaceState(null, document.title, window.location.pathname);
       }, 500);
