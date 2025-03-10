@@ -15,14 +15,14 @@ const featuresData = [
 
 const WhyWorkhub = () => {
   return (
-    <section id="whyWorkhub" style={{ background: "#f8f9fa", padding: "80px 0" }}> {/* Increased padding for better spacing */}
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}> {/* Full width adjustment */}
-        <Row gutter={[48, 48]} align="middle">
+    <section id="whyWorkhub" style={{ background: "#f8f9fa", padding: "80px 0" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
+        <Row gutter={[48, 48]} align="top">
           
           {/* Left Section */}
           <Col xs={24} md={10}>
             <Title level={5} style={{ color: "#D9534F", fontWeight: "600" }}>WHY WORKHUB</Title>
-            <Title level={2} style={{ fontWeight: "bold", lineHeight: "1.2" }}>We empower our clients' businesses.</Title>
+            <Title level={2} style={{ fontWeight: "bold", lineHeight: "1.2" }}>We empower our clients  businesses.</Title>
             <Text type="secondary">
               Our range of plans and services have been carefully developed to help clients run their businesses efficiently and cost-effectively.
             </Text>
@@ -32,7 +32,6 @@ const WhyWorkhub = () => {
             </a>
           </Col>
 
-          {/* Right Section - Features Grid */}
           <Col xs={24} md={14}>
             <Row gutter={[24, 24]}>
               {featuresData.map((feature) => (
@@ -49,7 +48,7 @@ const WhyWorkhub = () => {
                     onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
                     onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1.0)"}
                   >
-                    {/* Icon Container */}
+                  
                     <div style={{
                       width: "80px",
                       height: "80px",

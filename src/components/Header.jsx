@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Nav, Offcanvas, Button } from "react-bootstrap";
+import { Navbar, Nav, Offcanvas, Button, Container } from "react-bootstrap";
 import { FaBars } from "react-icons/fa";
 
 const AppHeader = () => {
   const [show, setShow] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const handleScrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      const yOffset = -70; 
+      const yOffset = -70;
       const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
 
@@ -24,36 +17,43 @@ const AppHeader = () => {
         window.history.replaceState(null, document.title, window.location.pathname);
       }, 500);
 
-      setShow(false); 
+      setShow(false);
     }
   };
 
   return (
     <>
+      {/* Bootstrap Navbar */}
       <Navbar expand="lg" bg="dark" variant="dark" fixed="top" className="px-3">
-        <Navbar.Brand href="/" className="fw-bold text-white">
-          WorkHub
-        </Navbar.Brand>
+        <Container>
+          {/* Logo */}
+          <Navbar.Brand href="/" className="fw-bold text-white">
+            WorkHub
+          </Navbar.Brand>
 
-        {isMobile ? (
-          <Button variant="dark" onClick={() => setShow(true)} className="ms-auto">
-            <FaBars size={24} />
-          </Button>
-        ) : (
-          <Nav className="ms-auto">
-            {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
-              <Nav.Link
-                key={section}
-                onClick={() => handleScrollToSection(section)}
-                className="text-white"
-              >
-                {["Home", "About", "Services", "Review", "Contact"][index]}
-              </Nav.Link>
-            ))}
-          </Nav>
-        )}
+          {/* Navbar Toggle Button for Mobile & Tablet */}
+          <Navbar.Toggle aria-controls="navbar-nav" className="border-0">
+            <FaBars size={24} color="white" />
+          </Navbar.Toggle>
+
+          {/* Navbar Links (Collapsible on tablets) */}
+          <Navbar.Collapse id="navbar-nav" className="justify-content-end">
+            <Nav>
+              {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
+                <Nav.Link
+                  key={section}
+                  onClick={() => handleScrollToSection(section)}
+                  className="text-white"
+                >
+                  {["Home", "About", "Services", "Review", "Contact"][index]}
+                </Nav.Link>
+              ))}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
 
+      {/* Offcanvas Menu for Mobile & Tablet */}
       <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
