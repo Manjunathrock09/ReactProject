@@ -56,7 +56,6 @@ const ClientReview = () => {
           </div>
         </Col>
 
-        {/* Image Section */}
         <Col xs={24} md={12} className="text-center">
           <img
             src="/images/image.png"

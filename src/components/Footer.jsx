@@ -9,7 +9,6 @@ const Footer = () => {
     <footer style={{ backgroundColor: "#f8f9fa", padding: "40px 0" }} id="footer">
       <div className="container">
         <Row gutter={[32, 32]}>
-          {/* Company Info */}
           <Col xs={24} md={8}>
             <Title level={4}>
               <HomeFilled style={{ color: "#1677ff", marginRight: 8 }} />
@@ -36,7 +35,6 @@ const Footer = () => {
             </div>
           </Col>
 
-          {/* Footer Links */}
           <Col xs={24} md={16}>
             <Row gutter={[16, 16]}>
               <Col xs={12} md={6}>
@@ -75,7 +73,6 @@ const Footer = () => {
 
         <Divider style={{ margin: "30px 0" }} />
 
-        {/* Copyright Section */}
         <div style={{ textAlign: "center" }}>
           <Text type="secondary">
             © {new Date().getFullYear()} - Workhub. All Rights Reserved 

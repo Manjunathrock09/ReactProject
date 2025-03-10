@@ -1,5 +1,5 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Hero = () => (
   <section
@@ -16,4 +16,4 @@ const Hero = () => (
   </section>
 );
 
-export default Hero;
+export default Hero; 

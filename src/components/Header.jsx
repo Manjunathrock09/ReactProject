@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Drawer, Button } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
-
-const { Header } = Layout;
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Nav, Offcanvas, Button } from "react-bootstrap";
+import { FaBars } from "react-icons/fa";
 
 const AppHeader = () => {
-  const [visible, setVisible] = useState(false);
+  const [show, setShow] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -17,96 +16,63 @@ const AppHeader = () => {
   const handleScrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      const yOffset = -70; // Adjust offset for fixed header
+      const yOffset = -70; 
       const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
-
       window.scrollTo({ top: y, behavior: "smooth" });
 
       setTimeout(() => {
         window.history.replaceState(null, document.title, window.location.pathname);
       }, 500);
 
-      setVisible(false); // Close drawer after navigation
+      setShow(false); 
     }
   };
 
   return (
-    <Header
-      style={{
-        position: "fixed",
-        width: "100%",
-        zIndex: 1000,
-        background: "#000",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 20px",
-      }}
-    >
-      <a
-        href="/"
-        style={{
-          color: "white",
-          fontSize: "20px",
-          fontWeight: "bold",
-          textDecoration: "none",
-        }}
-      >
-        WorkHub
-      </a>
+    <>
+      <Navbar expand="lg" bg="dark" variant="dark" fixed="top" className="px-3">
+        <Navbar.Brand href="/" className="fw-bold text-white">
+          WorkHub
+        </Navbar.Brand>
 
-      {isMobile ? (
-        <Button
-          type="text"
-          icon={<MenuOutlined style={{ fontSize: "24px", color: "white" }} />} // Fix icon rendering
-          onClick={() => setVisible(true)}
-          style={{
-            color: "white",
-            fontSize: "24px",
-            marginLeft: "auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-      ) : (
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          selectable={false}
-          style={{
-            flex: 1,
-            justifyContent: "flex-end",
-            background: "black",
-          }}
-        >
-          {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
-            <Menu.Item
-              key={section}
-              onClick={() => handleScrollToSection(section)}
-              style={{ color: "white", display: "flex", alignItems: "center" }}
-            >
-              {["Home", "About", "Services", "Review", "Contact"][index]}
-            </Menu.Item>
-          ))}
-        </Menu>
-      )}
+        {isMobile ? (
+          <Button variant="dark" onClick={() => setShow(true)} className="ms-auto">
+            <FaBars size={24} />
+          </Button>
+        ) : (
+          <Nav className="ms-auto">
+            {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
+              <Nav.Link
+                key={section}
+                onClick={() => handleScrollToSection(section)}
+                className="text-white"
+              >
+                {["Home", "About", "Services", "Review", "Contact"][index]}
+              </Nav.Link>
+            ))}
+          </Nav>
+        )}
+      </Navbar>
 
-      <Drawer
-        title="Menu"
-        placement="right"
-        closable
-        onClose={() => setVisible(false)}
-        open={visible}
-      >
-        <Menu mode="vertical">
-          {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
-            <Menu.Item key={section} onClick={() => handleScrollToSection(section)}>
-              {["Home", "About", "Services", "Review", "Contact"][index]}
-            </Menu.Item>
-          ))}
-        </Menu>
-      </Drawer>
-    </Header>
+      <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Nav className="flex-column">
+            {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
+              <Nav.Link
+                key={section}
+                onClick={() => handleScrollToSection(section)}
+                className="fs-5"
+              >
+                {["Home", "About", "Services", "Review", "Contact"][index]}
+              </Nav.Link>
+            ))}
+          </Nav>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
   );
 };
 
