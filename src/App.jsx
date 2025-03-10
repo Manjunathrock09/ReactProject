@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import WhyWorkhub from "./components/WhyWorkhub";
 import Footer from "./components/Footer";
+import ClientReview from "./components/ClientReview";
 
 const { Content } = Layout;
 
@@ -16,6 +17,7 @@ const App = () => {
         <Hero /> 
         <Features />
         <WhyWorkhub />
+        <ClientReview/>
       </Content>
       <Footer />
     </Layout>

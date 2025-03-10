@@ -1,5 +1,5 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 const featuresData = [
   { id: 1, title: "Office Space", description: "Choose from a range of office sizes and styles across 5 locations in Dublin City and Sandyford Business District.", image: "/images/office-space.jpg" },

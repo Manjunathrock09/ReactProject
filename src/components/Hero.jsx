@@ -1,26 +1,19 @@
 import React from "react";
-import { Button, Typography, Layout } from "antd";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
 
 const Hero = () => (
-  <Layout.Content
+  <section
     id="hero"
+    className="container-fluid text-center d-flex flex-column justify-content-center align-items-center vh-50"
     style={{
-      textAlign: "center",
-      padding: 60,
       background: "url('/images/background.jpg') center/cover no-repeat",
-      minHeight: "30vh",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      minHeight: "50vh",
     }}
   >
-    <Typography.Title level={1} strong>Welcome to WorkHub</Typography.Title>
-    <Typography.Paragraph style={{ fontSize: 18 }}>
-      Your best workspace solution.
-    </Typography.Paragraph>
-    <Button type="primary" size="large">Get Started</Button>
-  </Layout.Content>
+    <h1 className="fw-bold">Welcome to WorkHub</h1>
+    <p className="fs-5">Your best workspace solution.</p>
+    <a href="#services" className="btn btn-primary btn-lg mt-3">Get Started</a>
+  </section>
 );
 
-export default Hero; 
+export default Hero;

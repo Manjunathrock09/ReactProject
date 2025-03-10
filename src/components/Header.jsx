@@ -10,7 +10,6 @@ const AppHeader = () => {
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -18,16 +17,16 @@ const AppHeader = () => {
   const handleScrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 70,
-        behavior: "smooth",
-      });
+      const yOffset = -70; // Adjust offset for fixed header
+      const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
 
       setTimeout(() => {
         window.history.replaceState(null, document.title, window.location.pathname);
       }, 500);
 
-      setVisible(false);
+      setVisible(false); // Close drawer after navigation
     }
   };
 
@@ -58,9 +57,16 @@ const AppHeader = () => {
       {isMobile ? (
         <Button
           type="text"
-          icon={<MenuOutlined />}
+          icon={<MenuOutlined style={{ fontSize: "24px", color: "white" }} />} // Fix icon rendering
           onClick={() => setVisible(true)}
-          style={{ color: "white", fontSize: "24px", marginLeft: "auto" }}
+          style={{
+            color: "white",
+            fontSize: "24px",
+            marginLeft: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         />
       ) : (
         <Menu
@@ -73,13 +79,13 @@ const AppHeader = () => {
             background: "black",
           }}
         >
-          {["hero", "features", "whyWorkhub", "footer"].map((section, index) => (
+          {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
             <Menu.Item
-              key={index}
+              key={section}
               onClick={() => handleScrollToSection(section)}
-              style={{ color: "white" }}
+              style={{ color: "white", display: "flex", alignItems: "center" }}
             >
-              {["Home", "About", "Services", "Contact"][index]}
+              {["Home", "About", "Services", "Review", "Contact"][index]}
             </Menu.Item>
           ))}
         </Menu>
@@ -93,9 +99,9 @@ const AppHeader = () => {
         open={visible}
       >
         <Menu mode="vertical">
-          {["hero", "features", "whyWorkhub", "footer"].map((section, index) => (
-            <Menu.Item key={index} onClick={() => handleScrollToSection(section)}>
-              {["Home", "About", "Services", "Contact"][index]}
+          {["hero", "features", "whyWorkhub", "review", "footer"].map((section, index) => (
+            <Menu.Item key={section} onClick={() => handleScrollToSection(section)}>
+              {["Home", "About", "Services", "Review", "Contact"][index]}
             </Menu.Item>
           ))}
         </Menu>
