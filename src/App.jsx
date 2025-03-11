@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";  // No BrowserRouter here!
+import { Routes, Route } from "react-router-dom"; 
 import { Layout } from "antd";
 import Header from "./components/Header";  
 import Hero from "./components/Hero"; 
