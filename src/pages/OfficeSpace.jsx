@@ -41,6 +41,25 @@ const officesData = [
     size: "150 sq ft",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Camden+Street,+D02+XE80",
   },
+  {
+    id: 222,
+    location: "Fern Road, Sandyford D18 FP98",
+    image: "/images/fern-road-222.jpg",
+    description:
+      "Efficiency reigns in this 80 sqft first-floor office for two, illuminated by LED. Featuring coded corridor access, included parking, and thoughtful furnishings.",
+    desks: 2,
+    size: "80 sq ft",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Fern+Road,+Sandyford+D18+FP98",
+  },
+  {
+    id: 229,
+    location: "Fern Road, Sandyford D18 FP98",
+    image: "/images/fern-road.jpg",
+    description: "Elevate productivity in a 1650 sq ft sunlit office...",
+    desks: 11,
+    size: "1650 sq ft",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Fern+Road,+Sandyford+D18+FP98",
+  },
 ];
 
 const OfficeSpace = () => {
