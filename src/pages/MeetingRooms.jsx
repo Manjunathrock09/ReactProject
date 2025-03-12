@@ -13,7 +13,7 @@ const meetingRooms = [
     size: "260 sq ft",
     amenities:
       "Parking, Tea, Coffee, 60 inch TV, Poly Video Conferencing, Bathrooms, Banqueting available, Onsite Concierge, Canteen, Bike Parking, Showers, Air Filter.",
-    price: "50€",
+    price: "₹4,728.66",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const meetingRooms = [
     size: "260 sq ft",
     amenities:
       "Parking, Tea, Coffee, 60 inch TV, Poly Video Conferencing, Bathrooms, Banqueting available, Onsite Concierge, Canteen, Bike Parking, Showers, Air Filter.",
-    price: "50€",
+    price: "₹4,728.66",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const meetingRooms = [
     size: "260 sq ft",
     amenities:
       "Parking, Tea, Coffee, 60 inch TV, Poly Video Conferencing, Bathrooms, Banqueting available, Onsite Concierge, Canteen, Bike Parking, Showers, Air Filter.",
-    price: "50€",
+    price: "₹4,728.66",
   },
 ];
 const MeetingRooms = () => {
@@ -99,7 +99,7 @@ const MeetingRooms = () => {
                   <strong>Amenities:</strong> {room.amenities}
                 </p>
                 <p className="fw-bold fs-5 text-dark">
-                  <span className="text-danger">{room.price}€</span> / hour
+                  <span className="text-danger">{room.price}</span> / hour
                 </p>
                 <div className="d-flex justify-content-between">
                   <a href={room.mapsLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline-dark px-3">
