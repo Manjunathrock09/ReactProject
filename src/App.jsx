@@ -15,6 +15,8 @@ import EventSpaces from "./pages/EventSpaces";
 import DedicatedDesks from "./pages/DedicatedDesks";
 import CallService from "./pages/CallService";
 import StorageSolutions from "./pages/StorageSolutions";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 const { Content } = Layout;
 
