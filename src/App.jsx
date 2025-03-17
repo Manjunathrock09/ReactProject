@@ -16,6 +16,7 @@ import DedicatedDesks from "./pages/DedicatedDesks";
 import CallService from "./pages/CallService";
 import StorageSolutions from "./pages/StorageSolutions";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import BookingForm from "./pages/BookingForm";
 
 
 const { Content } = Layout;
