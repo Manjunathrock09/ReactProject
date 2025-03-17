@@ -1,15 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Typography, Button } from "antd";
-import {
-  ClockCircleOutlined,
-  PhoneOutlined,
-  GlobalOutlined,
-  UserOutlined,
-  CreditCardOutlined,
-} from "@ant-design/icons";
-
+import { ClockCircleOutlined, PhoneOutlined,GlobalOutlined, UserOutlined,CreditCardOutlined,} from "@ant-design/icons";
 const { Title, Paragraph } = Typography;
-
 const sections = [
   {
     title: "Immediate set up",
