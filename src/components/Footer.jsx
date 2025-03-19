@@ -8,9 +8,9 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-light py-5" id="contact"> {/* Bootstrap Background & Padding */}
+    <footer className="bg-light py-5" id="contact"> 
       <Container>
-        <Row className="gy-4"> {/* Responsive Grid with Gutter Spacing */}
+        <Row className="gy-4"> 
           
           {/* Company Info */}
           <Col xs={12} md={4}>
