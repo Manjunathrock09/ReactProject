@@ -51,6 +51,7 @@ const Hero = () => {
     <>
       {/* Hero Section */}
       <section
+        id="hero" // ✅ Added id for navbar connection
         style={{
           backgroundColor: "#fff",
           minHeight: "60vh",

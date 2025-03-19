@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Card, Row, Col, Button } from "antd";
 
 const featuresData = [
   {
@@ -71,61 +71,72 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <section className="bg-light py-5" id="features">
-      <div className="container">
-        <h2 className="text-center text-dark mb-4 fw-bold">Our Features</h2>
-        <div className="row g-4">
-          {featuresData.map((feature) => (
-            <div key={feature.id} className="col-md-6 col-lg-3">
-              <div
-                className="card shadow-lg border-0 rounded-4 overflow-hidden position-relative feature-card"
-                style={{
-                  transition: "transform 0.3s ease-in-out",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="position-relative">
+    <section
+      id="features" // ✅ Added id for navbar connection
+      style={{
+        backgroundColor: "#f5f5f5",
+        padding: "60px 20px",
+        textAlign: "center",
+      }}
+    >
+      <h2 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "20px" }}>
+        Our Features
+      </h2>
+
+      <Row gutter={[24, 24]} justify="center">
+        {featuresData.map((feature) => (
+          <Col key={feature.id} xs={24} sm={12} md={8} lg={6}>
+            <Card
+              hoverable
+              cover={
+                <div
+                  style={{
+                    height: "200px",
+                    overflow: "hidden",
+                    borderTopLeftRadius: "8px",
+                    borderTopRightRadius: "8px",
+                  }}
+                >
                   <img
                     src={feature.image}
                     alt={feature.title}
-                    className="card-img-top img-fluid"
-                    style={{ height: "200px", objectFit: "cover" }}
-                  />
-                  {/* Gradient Overlay */}
-                  <div
-                    className="position-absolute top-0 start-0 w-100 h-100"
                     style={{
-                      background: "rgba(0, 0, 0, 0.4)",
-                      borderRadius: "8px",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
                     }}
-                  ></div>
+                  />
                 </div>
-                <div className="card-body text-center d-flex flex-column">
-                  <h3 className="card-title h5 text-dark fw-bold">
-                    {feature.title}
-                  </h3>
-                  <p className="card-text text-muted flex-grow-1">
-                    {feature.description}
-                  </p>
-                  <Link
-                    to={feature.path}
-                    className="btn btn-primary mt-auto rounded-pill px-4 fw-semibold"
-                    style={{ transition: "background 0.3s ease-in-out" }}
-                  >
-                    Learn More →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+              }
+              style={{
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)",
+                transition: "transform 0.3s ease-in-out",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "bold" }}>{feature.title}</h3>
+              <p style={{ color: "#666", fontSize: "0.9rem", flexGrow: 1 }}>
+                {feature.description}
+              </p>
+              <Link to={feature.path}>
+                <Button type="primary" shape="round" block>
+                  Learn More →
+                </Button>
+              </Link>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
       {/* Hover effect */}
       <style>
         {`
-          .feature-card:hover {
-            transform: translateY(-10px);
+          .ant-card:hover {
+            transform: translateY(-5px);
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
           }
         `}
