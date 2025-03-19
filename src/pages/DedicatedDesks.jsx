@@ -159,8 +159,8 @@ const DedicatedDesks = () => {
                     <input type="email" className="form-control" placeholder="Enter your email" />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Message</label>
-                    <textarea className="form-control" rows="3" placeholder="Your message"></textarea>
+                    <label className="form-label">Select</label>
+                    <textarea className="form-control" rows="3" placeholder="Enter your choice"></textarea>
                   </div>
                   <button type="submit" className="btn btn-danger w-100">Submit</button>
                 </form>
@@ -170,6 +170,7 @@ const DedicatedDesks = () => {
         </div>
       )}
     </div>
+    
   );
 };
 

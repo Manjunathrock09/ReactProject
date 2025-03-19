@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BookingForm from "./BookingForm";
 import { SyncOutlined, CustomerServiceOutlined, MailOutlined, ScanOutlined, DollarCircleOutlined, LaptopOutlined, CrownOutlined, GlobalOutlined } from "@ant-design/icons";
 
 const plans = [
