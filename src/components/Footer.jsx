@@ -1,113 +1,139 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { 
-  FacebookOutlined, InstagramOutlined, LinkedinOutlined, WhatsAppOutlined, 
-  HomeFilled, AppstoreOutlined, MailOutlined, PhoneOutlined, CoffeeOutlined, 
-  FileTextOutlined, EnvironmentOutlined 
-} from "@ant-design/icons";
+import { Row, Col, Typography, Space, Divider } from "antd";
+import { FacebookOutlined, InstagramOutlined, LinkedinOutlined, WhatsAppOutlined, HomeFilled } from "@ant-design/icons";
+
+const { Title, Text, Link } = Typography;
 
 const Footer = () => {
   return (
-    <footer className="bg-light py-5" id="contact"> 
-      <Container>
-        <Row className="gy-4"> 
+    <footer style={{ backgroundColor: "#f8f9fa", padding: "50px 0", fontFamily: "'Poppins', sans-serif" }} id="footer">
+      <div className="container">
+        <Row gutter={[32, 32]}>
           
           {/* Company Info */}
-          <Col xs={12} md={4}>
-            <h5 className="d-flex align-items-center">
-              <HomeFilled className="text-primary me-2" />
+          <Col xs={24} md={8}>
+            <Title level={4} style={{ display: "flex", alignItems: "center", fontWeight: "bold" }}>
+              <HomeFilled style={{ color: "#1677ff", marginRight: 10 }} />
               Workhub
-            </h5>
-            <p className="text-muted">
-              Specializes in finding the right solution for you and your business.
-            </p>
+            </Title>
+            <Text style={{ fontSize: "16px", color: "#444", lineHeight: "1.8" }}>
+              Specialises in finding the right solution for you and your business.
+            </Text>
 
             {/* Social Media Icons */}
-            <div className="mt-3">
-              <a href="#" className="text-decoration-none me-3 text-primary"><FacebookOutlined className="fs-3" /></a>
-              <a href="#" className="text-decoration-none me-3 text-danger"><InstagramOutlined className="fs-3" /></a>
-              <a href="#" className="text-decoration-none me-3 text-info"><LinkedinOutlined className="fs-3" /></a>
-              <a href="#" className="text-decoration-none text-success"><WhatsAppOutlined className="fs-3" /></a>
+            <div style={{ marginTop: 20 }}>
+              <Space size="large">
+                <Link href="https://facebook.com" target="_blank">
+                  <FacebookOutlined style={iconStyle("#3b5998")} />
+                </Link>
+                <Link href="https://instagram.com" target="_blank">
+                  <InstagramOutlined style={iconStyle("#E4405F")} />
+                </Link>
+                <Link href="https://linkedin.com" target="_blank">
+                  <LinkedinOutlined style={iconStyle("#0077b5")} />
+                </Link>
+                <Link href="https://wa.me/+1234567890" target="_blank">
+                  <WhatsAppOutlined style={iconStyle("#25D366")} />
+                </Link>
+              </Space>
             </div>
           </Col>
 
-          {/* Footer Links */}
-          {footerLinks.map((category, index) => (
-            <Col xs={6} md={2} key={index}>
-              <h6 className="fw-bold">
-                {category.icon} {category.title}
-              </h6>
-              <ul className="list-unstyled">
-                {category.links.map((link, idx) => (
-                  <li key={idx} className="text-primary">
-                    {link.icon} {link.label}
-                  </li>
-                ))}
-              </ul>
-            </Col>
-          ))}
+          {/* Footer Links Section */}
+          <Col xs={24} md={16}>
+            <Row gutter={[16, 16]}>
+              {footerLinks.map((category, index) => (
+                <Col xs={12} md={6} key={index}>
+                  <Text style={{ fontSize: "16px", fontWeight: "bold", color: "#333" }}>{category.title}</Text>
+                  <ul style={{ listStyle: "none", paddingLeft: 0, marginTop: 10 }}>
+                    {category.links.map((link, idx) => (
+                      <li key={idx} style={{ marginBottom: "6px" }}>
+                        <Link href={link.href} style={{ fontSize: "15px", color: "#1677ff" }}>
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Col>
+              ))}
+            </Row>
+          </Col>
         </Row>
 
         {/* Divider */}
-        <hr className="my-4" />
+        <Divider style={{ margin: "40px 0" }} />
 
-        {/* Footer Bottom */}
-        <div className="text-center">
-          <p className="text-muted mb-0">
+        {/* Footer Bottom Section */}
+        <div style={{ textAlign: "center" }}>
+          <Text style={{ fontSize: "15px", color: "#666" }}>
             © {new Date().getFullYear()} - Workhub. All Rights Reserved  
-            <span className="text-danger ms-2">Web Development</span>
-          </p>
-          <div className="mt-3">
-            <a href="#" className="text-dark text-decoration-none me-3">Privacy Policy</a>
-            <a href="#" className="text-dark text-decoration-none me-3">Terms & Conditions</a>
-            <a href="#" className="text-dark text-decoration-none me-3">Sitemap</a>
-            <a href="#" className="text-dark text-decoration-none">Careers</a>
+            <Link href="/developer" style={{ color: "#ff4d4f", marginLeft: 5 }}> Web Development</Link>
+          </Text>
+          
+          <div style={{ marginTop: 15 }}>
+            <Space size="large">
+              <Link href="/privacy" style={bottomLinkStyle}>Privacy Policy</Link>
+              <Link href="/terms" style={bottomLinkStyle}>Terms & Conditions</Link>
+              <Link href="/sitemap" style={bottomLinkStyle}>Sitemap</Link>
+              <Link href="/careers" style={bottomLinkStyle}>Careers</Link>
+            </Space>
           </div>
         </div>
-      </Container>
+      </div>
     </footer>
   );
+};
+
+/* Custom Styles */
+const iconStyle = (color) => ({
+  fontSize: "28px",
+  color,
+  transition: "transform 0.3s ease-in-out",
+  cursor: "pointer",
+  marginRight: "10px"
+});
+
+const bottomLinkStyle = {
+  fontSize: "15px",
+  color: "#444",
+  transition: "color 0.3s ease-in-out",
 };
 
 const footerLinks = [
   {
     title: "Office Space",
-    icon: <AppstoreOutlined className="text-primary" />,
     links: [
-      { label: "Serviced Offices", icon: <EnvironmentOutlined className="text-primary" /> },
-      { label: "Locations", icon: <EnvironmentOutlined className="text-primary" /> },
-      { label: "Meeting Rooms", icon: <CoffeeOutlined className="text-primary" /> },
-      { label: "Custom Workspaces", icon: <AppstoreOutlined className="text-primary" /> },
+      { label: "Serviced Offices", href: "/offices" },
+      { label: "Locations", href: "/locations" },
+      { label: "Meeting Rooms", href: "/meeting-rooms" },
+      { label: "Custom Workspaces", href: "/custom-workspaces" },
     ],
   },
   {
     title: "Virtual Office",
-    icon: <FileTextOutlined className="text-primary" />,
     links: [
-      { label: "Essential Plan", icon: <FileTextOutlined className="text-primary" /> },
-      { label: "Plus Plan", icon: <FileTextOutlined className="text-primary" /> },
-      { label: "Business Plan", icon: <FileTextOutlined className="text-primary" /> },
-      { label: "Enterprise Plan", icon: <FileTextOutlined className="text-primary" /> },
+      { label: "Essential Plan", href: "/plans" },
+      { label: "Plus Plan", href: "/plans" },
+      { label: "Business Plan", href: "/plans" },
+      { label: "Enterprise Plan", href: "/enterprise" },
     ],
   },
   {
     title: "Co-Working",
-    icon: <CoffeeOutlined className="text-primary" />,
     links: [
-      { label: "Dedicated Desk", icon: <CoffeeOutlined className="text-primary" /> },
-      { label: "Day Pass", icon: <CoffeeOutlined className="text-primary" /> },
-      { label: "Private Booth", icon: <CoffeeOutlined className="text-primary" /> },
-      { label: "Startup Hub", icon: <CoffeeOutlined className="text-primary" /> },
+      { label: "Dedicated Desk", href: "/coworking" },
+      { label: "Day Pass", href: "/coworking" },
+      { label: "Private Booth", href: "/private-booth" },
+      { label: "Startup Hub", href: "/startup-hub" },
     ],
   },
   {
     title: "Support",
-    icon: <MailOutlined className="text-primary" />,
     links: [
-      { label: "Contact Us", icon: <MailOutlined className="text-primary" /> },
-      { label: "FAQs", icon: <FileTextOutlined className="text-primary" /> },
-      { label: "Help Center", icon: <PhoneOutlined className="text-primary" /> },
-      { label: "Community Support", icon: <AppstoreOutlined className="text-primary" /> },
+      { label: "Contact Us", href: "/contact" },
+      { label: "FAQs", href: "/faq" },
+      { label: "Help Center", href: "/help" },
+      { label: "Community Support", href: "/community" },
     ],
   },
 ];

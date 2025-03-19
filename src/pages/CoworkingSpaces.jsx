@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button, Card, Row, Col } from "react-bootstrap";
 import { Tooltip } from "antd";
@@ -34,6 +35,8 @@ const CoworkingSpaces = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [infoContent, setInfoContent] = useState(null);
+  
+  const navigate = useNavigate();  // ✅ FIX: Added navigate hook inside the component
 
   const handleShowMore = (title, description) => {
     setInfoContent({ title, description });
@@ -48,7 +51,9 @@ const CoworkingSpaces = () => {
   const handleSelectLocation = (location) => {
     setSelectedLocation(location);
     setShowModal(false);
-    alert(`You have selected ${location.name} for your ${selectedPlan} purchase.`);
+
+    // ✅ FIX: Moved navigate inside function
+    navigate("/payment", { state: { plan: selectedPlan, location } });
   };
 
   return (
@@ -145,19 +150,6 @@ const CoworkingSpaces = () => {
             </Card>
           ))}
         </Modal.Body>
-      </Modal>
-
-      {/* Info Modal */}
-      <Modal show={showInfoModal} onHide={() => setShowInfoModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{infoContent?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>{infoContent?.description}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowInfoModal(false)}>Close</Button>
-        </Modal.Footer>
       </Modal>
     </div>
   );

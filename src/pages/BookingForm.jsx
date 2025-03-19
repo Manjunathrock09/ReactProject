@@ -53,7 +53,7 @@ const BookingForm = ({ onClose }) => {
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content shadow-lg border-0">
             <div className="modal-header bg-dark text-white">
-              <h5 className="modal-title">Book a Meeting Room</h5>
+              <h5 className="modal-title">Fill this form </h5>
               <button type="button" className="btn-close btn-close-white" onClick={onClose}></button>
             </div>
             <div className="modal-body">

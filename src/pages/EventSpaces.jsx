@@ -1,11 +1,11 @@
-import React, { useState } from "react";  // ✅ Import useState
+import React, { useState } from "react";  
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BookingForm from "./BookingForm";
 import { useNavigate } from "react-router-dom";
 
 const EventSpaces = () => {
-  const [showModal, setShowModal] = useState(false); // ✅ Fix: Import useState
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleBookNow = () => {
@@ -15,18 +15,18 @@ const EventSpaces = () => {
     setShowModal(true);
   };
   const eventSpaces = [
-    { id: 1, name: "Creative Lab", capacity: "20-50", price: "$200/hr", img: "/images/Creative Lab.jpg" },
-    { id: 2, name: "Innovation Hub", capacity: "30-70", price: "$250/hr", img: "/images/Innovation Hub.avif" },
-    { id: 3, name: "Grand Conference Hall", capacity: "100-300", price: "$500/hr", img: "/images/Grand Conference Hall.avif" },
-    { id: 4, name: "Executive Boardroom", capacity: "20-40", price: "$350/hr", img: "/images/Executive Boardroom.jpg" },
-    { id: 5, name: "Sky Lounge", capacity: "50-150", price: "$400/hr", img: "/images/Sky Lounge.avif" },
-    { id: 6, name: "Urban Loft", capacity: "30-80", price: "$300/hr", img: "/images/Urban Loft.jpg" },
+    { id: 1, name: "Creative Lab", capacity: "20-50", price: " ₹17,288/hr", img: "/images/Creative Lab.jpg" },
+    { id: 2, name: "Innovation Hub", capacity: "30-70", price: "₹21,610/hr", img: "/images/Innovation Hub.avif" },
+    { id: 3, name: "Grand Conference Hall", capacity: "100-300", price: "₹25,932/hr", img: "/images/Grand Conference Hall.avif" },
+    { id: 4, name: "Executive Boardroom", capacity: "20-40", price: "₹30,254/hr", img: "/images/Executive Boardroom.jpg" },
+    { id: 5, name: "Sky Lounge", capacity: "50-150", price: "₹34,576/hr", img: "/images/Sky Lounge.avif" },
+    { id: 6, name: "Urban Loft", capacity: "30-80", price: "₹43,220/hr", img: "/images/Urban Loft.jpg" },
   ];
 
   const moreEventSpaces = [
-    { id: 7, name: "Glass Pavilion", capacity: "50-200", price: "$600/hr", img: "/images/Glass Pavilion.jpg" },
-    { id: 8, name: "VIP Lounge", capacity: "20-50", price: "$450/hr", img: "/images/VIP Lounge interior.jpg" },
-    { id: 9, name: "Outdoor Garden", capacity: "100-400", price: "$700/hr", img: "/images/Outdoor Garden.jpg" },
+    { id: 7, name: "Glass Pavilion", capacity: "50-200", price: "₹51,864/hr", img: "/images/Glass Pavilion.jpg" },
+    { id: 8, name: "VIP Lounge", capacity: "20-50", price: "₹38,898/hr/hr", img: "/images/VIP Lounge interior.jpg" },
+    { id: 9, name: "Outdoor Garden", capacity: "100-400", price: "₹60,508/hr", img: "/images/Outdoor Garden.jpg" },
   ];
 
   return (

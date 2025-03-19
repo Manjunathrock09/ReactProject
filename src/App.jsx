@@ -17,6 +17,7 @@ import CallService from "./pages/CallService";
 import StorageSolutions from "./pages/StorageSolutions";
 import BookingForm from "./pages/BookingForm";
 import OurCompany from "./pages/OurCompany";
+import PaymentPage from "./pages/payamentpage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -63,6 +64,8 @@ const App = () => {
           <Route path="/storage-solutions" element={<StorageSolutions />} />
           <Route path="/booking" element={<BookingForm />} />
           <Route path="/our-company" element={<OurCompany />} />
+          <Route path="/payment" element={<PaymentPage />} />
+
 
           {/* Authentication Pages */}
           <Route path="/login" element={<Login />} />
