@@ -16,6 +16,7 @@ import DedicatedDesks from "./pages/DedicatedDesks";
 import CallService from "./pages/CallService";
 import StorageSolutions from "./pages/StorageSolutions";
 import BookingForm from "./pages/BookingForm";
+import OurCompany from "./pages/OurCompany";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/call-service" element={<CallService />} />
           <Route path="/storage-solutions" element={<StorageSolutions />} />
           <Route path="/booking" element={<BookingForm />} />
+          <Route path="/our-company" element={<OurCompany />} />
 
           {/* Authentication Pages */}
           <Route path="/login" element={<Login />} />
