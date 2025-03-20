@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button, Modal, Card, Row, Col, Spin, message } from "antd";
+import { Input, Button, Modal, Card, Row, Col, Spin, message, AutoComplete } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "antd/dist/reset.css";
 
@@ -30,17 +30,44 @@ const Hero = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedOffice, setSelectedOffice] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [options, setOptions] = useState([]);
+
+  const officeSuggestions = [
+    "Modern Office",
+    "Corporate Office",
+    "Coworking Space",
+    "Startup Office",
+    "Open Workspace",
+    "Minimalist Office",
+    "Tech Office",
+    "Luxury Office",
+    "Meeting Room",
+    "Conference Room",
+  ];
 
   const fetchOffices = async () => {
     if (!searchQuery.trim()) return;
+
+    // Ensure the search query is from the predefined suggestions
+    if (!officeSuggestions.includes(searchQuery)) {
+      message.error("Please select an office type from the suggestions!");
+      return;
+    }
+
     setLoading(true);
     setError(null);
+
     try {
       const response = await fetch(
         `https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&client_id=${UNSPLASH_ACCESS_KEY}`
       );
       if (!response.ok) throw new Error("Failed to fetch data. Check your API key.");
       const data = await response.json();
+
+      if (data.results.length === 0) {
+        message.error("No offices found!");
+      }
+
       setOffices(data.results || []);
       setShowModal(true);
       setSearchQuery("");
@@ -60,6 +87,15 @@ const Hero = () => {
     setShowDetailModal(true);
   };
 
+  const handleSearchChange = (value) => {
+    setSearchQuery(value);
+    setOptions(
+      officeSuggestions
+        .filter((suggestion) => suggestion.toLowerCase().includes(value.toLowerCase()))
+        .map((suggestion) => ({ value: suggestion }))
+    );
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -71,14 +107,21 @@ const Hero = () => {
           Your Best Workspace Solution.
         </p>
         <div style={{ width: "90%", maxWidth: "500px", display: "flex" }}>
-          <Input
-            placeholder="Enter city name..."
-            size="large"
+          <AutoComplete
+            options={options}
+            style={{ flex: 1 }}
+            onSearch={handleSearchChange}
+            onSelect={(value) => setSearchQuery(value)}
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onPressEnter={handleKeyPress}
-            style={styles.input}
-          />
+          >
+            <Input
+              placeholder="Search office type..."
+              size="large"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onPressEnter={handleKeyPress}
+              style={styles.input}
+            />
+          </AutoComplete>
           <Button type="primary" icon={<SearchOutlined />} size="large" style={styles.button} onClick={fetchOffices}>
             Search
           </Button>
