@@ -25,6 +25,8 @@ import NotFound from "./pages/NotFound";
 import { auth } from "./firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import ResultsPage from "./pages/ResultsPage"; 
+
 
 const { Content } = Layout;
 
@@ -65,6 +67,8 @@ const App = () => {
           <Route path="/booking" element={<BookingForm />} />
           <Route path="/our-company" element={<OurCompany />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+
 
 
           {/* Authentication Pages */}
