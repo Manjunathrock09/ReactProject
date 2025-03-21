@@ -1,166 +1,99 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const officesData = [
-  {
-    id: 3,
-    location: "Baggot Street, D04 N528",
-    image: "/images/baggot-street.jpg",
-    description: "Cozy solo 70 sq ft office...",
-    desks: 1,
-    size: "70 sq ft",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Baggot+Street,+D04+N528",
+  { 
+    id: 1, 
+    name: "Hinjewadi, Pune", 
+    description: "A modern 100 sq ft private office in Pune’s top IT hub. Ideal for startups and professionals.", 
+    image: "/images/office1.jpg"
   },
-  {
-    id: 214,
-    location: "Bracken Road, D18 CV48",
-    image: "/images/bracken-road.jpg",
-    description: "Inviting office oasis...",
-    desks: 8,
-    size: "330 sq ft",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Bracken+Road,+D18+CV48",
+  { 
+    id: 2, 
+    name: "MG Road, Bengaluru", 
+    description: "Located in the heart of Bangalore, this 200 sq ft workspace is perfect for tech entrepreneurs.", 
+    image: "/images/office2.jpg"
   },
-  {
-    id: 218,
-    location: "Fern Road, Sandyford D18 FP98",
-    image: "/images/fern-road-218.jpg",
-    description:
-      "Explore efficiency in this compact 80 sqft first-floor office with LED lighting, ideal for two. Privacy and security ensured with coded corridor access.",
-    desks: 2,
-    size: "80 sq ft",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Fern+Road,+Sandyford+D18+FP98",
+  { 
+    id: 3, 
+    name: "Bandra Kurla Complex, Mumbai", 
+    description: "A premium 500 sq ft office in Mumbai’s prime business district. Ideal for corporate setups.", 
+    image: "/images/office3.jpg"
   },
-  {
-    id: 6,
-    location: "Camden Street, D02 XE80",
-    image: "/images/camden-street.jpg",
-    description:
-      "Balancing functionality and comfort, promising growth and collaboration in Pleasant Street's vibrant ambiance. Workspace with 4 desks and a cozy couch.",
-    desks: 4,
-    size: "150 sq ft",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Camden+Street,+D02+XE80",
+  { 
+    id: 4, 
+    name: "Connaught Place, Delhi", 
+    description: "A 300 sq ft modern office in Delhi’s iconic commercial center, perfect for high-end businesses.", 
+    image: "/images/office4.jpg"
   },
-  {
-    id: 222,
-    location: "Fern Road, Sandyford D18 FP98",
-    image: "/images/fern-road-222.jpg",
-    description:
-      "Efficiency reigns in this 80 sqft first-floor office for two, illuminated by LED. Featuring coded corridor access, included parking, and thoughtful furnishings.",
-    desks: 2,
-    size: "80 sq ft",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Fern+Road,+Sandyford+D18+FP98",
+  { 
+    id: 5, 
+    name: "Salt Lake, Kolkata", 
+    description: "This 150 sq ft smart workspace is located in Kolkata’s IT hub. Best for tech startups and freelancers.", 
+    image: "/images/office5.jpg"
   },
-  {
-    id: 229,
-    location: "Fern Road, Sandyford D18 FP98",
-    image: "/images/fern-road.jpg",
-    description: "Elevate productivity in a 1650 sq ft sunlit office...",
-    desks: 11,
-    size: "1650 sq ft",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Fern+Road,+Sandyford+D18+FP98",
+  { 
+    id: 6, 
+    name: "Gachibowli, Hyderabad", 
+    description: "A spacious 400 sq ft office in Hyderabad’s corporate district. Close to top MNCs and IT parks.", 
+    image: "/images/office6.jpg"
   },
 ];
 
 const OfficeSpace = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [offices, setOffices] = useState(officesData);
-  const [loading, setLoading] = useState(false);
-
-  const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
-
-  const fetchImages = async (query) => {
-    if (!query) {
-      setOffices(officesData);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await axios.get("https://api.unsplash.com/search/photos", {
-        params: { query, per_page: officesData.length },
-        headers: {
-          Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
-        },
-      });
-
-      const updatedOffices = officesData.map((office, index) => ({
-        ...office,
-        image: response.data.results[index]?.urls.regular || office.image,
-      }));
-
-      setOffices(updatedOffices);
-    } catch (error) {
-      console.error("Error fetching images:", error);
-    }
-    setLoading(false);
-  };
-
-  const handleSearchChange = (event) => {
-    const query = event.target.value;
-    setSearchTerm(query);
-    fetchImages(query);
+  // Function to open Google Maps with a search for the office name
+  const handleViewMap = (officeName) => {
+    const googleMapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(officeName)}`;
+    window.open(googleMapsUrl, "_blank");
   };
 
   return (
-    <div className="container-fluid py-5 bg-light">
-      <div className="container text-center">
-        <h5 className="text-danger fw-bold">OFFICE SPACE</h5>
-        <h1 className="fw-bold display-4">Find Your Ideal Office</h1>
-        <p className="text-muted lead">
-          Lockable and move-in ready office spaces with access to shared conference rooms, common areas, and premium amenities.
-        </p>
-        <p className="text-muted">
-          From cozy private offices to expansive suites, find a space that enhances productivity with high-speed internet, ergonomic workstations, and top-tier security.
-        </p>
+    <div className="container py-5">
+      {/* Title & Description */}
+      <h1 className="text-center mb-4 fw-bold text-dark">🏢 Find Your Ideal Office</h1>
+      <p className="text-center text-muted mb-5 px-3">
+        Explore premium office spaces in major Indian cities.
+      </p>
 
-        {/* Search Bar */}
-        <div className="d-flex justify-content-center my-4">
-          <input
-            type="text"
-            className="form-control form-control-lg w-50 rounded-pill shadow-sm text-center border-0"
-            placeholder="Search for office images 🔍"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            style={{ maxWidth: "500px" }}
-          />
-        </div>
-
-        {/* Loading Indicator */}
-        {loading && <p className="text-center text-primary">Loading images...</p>}
-
-        {/* Office Cards Grid */}
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
-          {offices.map((office) => (
-            <div key={office.id} className="col">
-              <div className="card shadow-lg border-0 h-100 rounded-4">
-                <div className="rounded-top overflow-hidden">
-                  <img
-                    src={office.image}
-                    alt={office.location}
-                    className="card-img-top"
-                    style={{ objectFit: "cover", height: "230px" }}
-                    onError={(e) => (e.target.src = "/images/placeholder.jpg")}
-                  />
-                </div>
-                <div className="card-body">
-                  <h6 className="text-danger fw-bold">OFFICE {office.id}</h6>
-                  <h4 className="fw-bold">{office.location}</h4>
-                  <p className="text-muted">
-                    <a href={office.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
-                      View in Maps 📍
-                    </a>
-                  </p>
-                  <p className="text-muted">{office.description}</p>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <span className="fw-bold text-primary">👥 {office.desks} Desks</span>
-                    <span className="fw-bold text-secondary">📏 {office.size}</span>
-                  </div>
-                </div>
+      {/* Office Cards */}
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {officesData.map((office) => (
+          <div key={office.id} className="col">
+            <div 
+              className="card shadow-sm border-0 h-100"
+              style={{ 
+                transition: "transform 0.3s ease-in-out", 
+                cursor: "pointer", 
+                borderRadius: "12px",
+                overflow: "hidden"
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              <img 
+                src={office.image} 
+                alt={office.name} 
+                className="card-img-top" 
+                style={{ 
+                  height: "220px", 
+                  objectFit: "cover", 
+                  borderRadius: "12px 12px 0 0" 
+                }} 
+              />
+              <div className="card-body text-center">
+                <h5 className="fw-bold text-dark">{office.name}</h5>
+                <p className="text-muted">{office.description}</p>
+                <button 
+                  className="btn btn-primary px-4"
+                  style={{ borderRadius: "20px" }}
+                  onClick={() => handleViewMap(office.name)}
+                >
+                  📍 View on Google Maps
+                </button>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
