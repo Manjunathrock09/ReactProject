@@ -75,7 +75,8 @@ const OfficeSpace = () => {
                 alt={office.name} 
                 className="card-img-top" 
                 style={{ 
-                  height: "220px", 
+                  width: "100%", 
+                  height: "250px", 
                   objectFit: "cover", 
                   borderRadius: "12px 12px 0 0" 
                 }} 

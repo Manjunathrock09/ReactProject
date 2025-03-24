@@ -16,9 +16,6 @@ const BookingForm = ({ onClose }) => {
     phone: "",
     countryCode: "+91",
     email: "",
-    company: "",
-    subject: "",
-    message: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -30,7 +27,7 @@ const BookingForm = ({ onClose }) => {
   const validateForm = () => {
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== "company") newErrors[key] = "This field is required";
+      if (!formData[key]) newErrors[key] = "This field is required";
     });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -49,66 +46,135 @@ const BookingForm = ({ onClose }) => {
 
   return (
     <>
-      <div className="modal fade show d-block" tabIndex="-1">
-        <div className="modal-dialog modal-lg modal-dialog-centered">
-          <div className="modal-content shadow-lg border-0">
-            <div className="modal-header bg-dark text-white">
-              <h5 className="modal-title">Fill this form </h5>
-              <button type="button" className="btn-close btn-close-white" onClick={onClose}></button>
+      {/* BACKDROP */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "rgba(0, 0, 0, 0.6)",
+          zIndex: 1040,
+          backdropFilter: "blur(5px)",
+        }}
+        onClick={onClose}
+      ></div>
+
+      {/* MODAL */}
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "90%",
+          maxWidth: "500px",
+          background: "white",
+          borderRadius: "12px",
+          boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.3)",
+          zIndex: 1050,
+          overflow: "hidden",
+        }}
+      >
+        {/* HEADER */}
+        <div
+          style={{
+            padding: "18px",
+            background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+            color: "white",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderRadius: "12px 12px 0 0",
+          }}
+        >
+          <h4 style={{ margin: 0 }}>📅 Enter your choice</h4>
+          <button
+            style={{
+              background: "rgba(255, 255, 255, 0.8)",
+              borderRadius: "50%",
+              border: "none",
+              width: "30px",
+              height: "30px",
+              fontSize: "16px",
+              cursor: "pointer",
+              transition: "all 0.2s ease-in-out",
+            }}
+            onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
+            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+            onClick={onClose}
+          >
+            ❌
+          </button>
+        </div>
+
+        {/* FORM BODY */}
+        <div style={{ padding: "25px" }}>
+          <form onSubmit={handleSubmit}>
+            {/* FULL NAME & EMAIL */}
+            {[
+              { name: "fullName", type: "text", placeholder: "Full Name" },
+              { name: "email", type: "email", placeholder: "Email" },
+            ].map(({ name, type, placeholder }) => (
+              <div className="mb-3 position-relative" key={name}>
+                <input
+                  type={type}
+                  name={name}
+                  className={`form-control floating-input ${formData[name] ? "active" : ""}`}
+                  placeholder={placeholder}
+                  value={formData[name]}
+                  onChange={handleChange}
+                  style={{ borderRadius: "8px", padding: "10px 15px" }}
+                />
+                <label className={`floating-label ${formData[name] ? "visible" : ""}`}>{placeholder}</label>
+                {errors[name] && <small className="text-danger">{errors[name]}</small>}
+              </div>
+            ))}
+
+            {/* PHONE NUMBER */}
+            <div className="mb-3">
+              <div className="d-flex">
+                <Select
+                  options={countryOptions}
+                  defaultValue={countryOptions.find((opt) => opt.value === formData.countryCode)}
+                  onChange={handleCountryChange}
+                  className="me-2 flex-grow-1"
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  className={`form-control floating-input ${formData.phone ? "active" : ""}`}
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  style={{ borderRadius: "8px", padding: "10px 15px" }}
+                />
+              </div>
+              {errors.phone && <small className="text-danger">{errors.phone}</small>}
             </div>
-            <div className="modal-body">
-              <form onSubmit={handleSubmit}>
-                {[
-                  { label: "Full Name", name: "fullName", type: "text", placeholder: "Enter your full name" },
-                  { label: "Email", name: "email", type: "email", placeholder: "Enter email address" },
-                  { label: "Company (Optional)", name: "company", type: "text", placeholder: "Company name" },
-                  { label: "Subject", name: "subject", type: "text", placeholder: "Enter subject" },
-                ].map(({ label, name, type, placeholder }) => (
-                  <div className="mb-3" key={name}>
-                    <label className="form-label fw-bold">{label}</label>
-                    <input type={type} name={name} className="form-control" placeholder={placeholder} value={formData[name]} onChange={handleChange} />
-                    {errors[name] && <small className="text-danger">{errors[name]}</small>}
-                  </div>
-                ))}
 
-                <div className="mb-3">
-                  <label className="form-label fw-bold">Phone Number</label>
-                  <div className="d-flex">
-                    <Select options={countryOptions} defaultValue={countryOptions.find((opt) => opt.value === formData.countryCode)} onChange={handleCountryChange} className="me-2" />
-                    <input type="tel" name="phone" className="form-control" placeholder="Enter phone number" value={formData.phone} onChange={handleChange} />
-                  </div>
-                  {errors.phone && <small className="text-danger">{errors.phone}</small>}
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label fw-bold">What are you interested in?</label>
-                  <textarea name="message" className="form-control" rows="3" placeholder="Write your message..." value={formData.message} onChange={handleChange}></textarea>
-                  {errors.message && <small className="text-danger">{errors.message}</small>}
-                </div>
-
-                <p className="text-muted small">
-                  By clicking the button below, you agree to our <a href="#">Terms of Service</a> and read our <a href="#">Privacy Policy</a>.
-                </p>
-
-                <div className="d-grid">
-                  <button type="submit" className="btn btn-dark btn-lg">Send Message</button>
-                </div>
-              </form>
-            </div>
-          </div>
+            {/* SUBMIT BUTTON */}
+            <button
+              type="submit"
+              style={{
+                width: "100%",
+                padding: "12px",
+                fontSize: "16px",
+                fontWeight: "bold",
+                background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer",
+                transition: "0.3s",
+              }}
+            >
+              ✉️ Send Message
+            </button>
+          </form>
         </div>
       </div>
-
-      {showSuccess && (
-        <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1050 }}>
-          <div className="toast show text-white bg-success">
-            <div className="d-flex">
-              <div className="toast-body">✅ Message Sent Successfully!</div>
-              <button type="button" className="btn-close btn-close-white me-2" onClick={() => setShowSuccess(false)}></button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
