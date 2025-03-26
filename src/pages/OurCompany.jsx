@@ -1,85 +1,129 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Typography, Avatar } from "antd";
-import {
-  UserOutlined,
-  BankOutlined,
-  StarOutlined,
-  SolutionOutlined,
-  RocketOutlined,
-  GlobalOutlined,
-  SafetyCertificateOutlined,
-} from "@ant-design/icons";
+import React, { useState } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Typography, Avatar, Input } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph } = Typography;
 
 const OurCompany = () => {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({});
+
+  // Handle input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Form validation
+  const validateForm = () => {
+    let newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Valid email is required.";
+    if (!formData.message.trim()) newErrors.message = "Message cannot be empty.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      alert(`Thank you, ${formData.name}! Your inquiry has been submitted.`);
+      setFormData({ name: "", email: "", message: "" });
+      setErrors({});
+    }
+  };
+
   return (
-    <Container fluid className="py-5" style={{ fontFamily: "'Poppins', sans-serif" }}>
+    <Container fluid className="py-5 px-md-5" style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: "#fffbe7" }}>
       
       {/* Company Intro Section */}
-      <Row className="align-items-center mb-5 g-4">
+      <Row className="align-items-center mb-5 g-4 animate-fade-in">
         <Col md={6} className="d-flex flex-column">
-          <Title level={5} className="text-uppercase text-danger">Workhub</Title>
-          <Title level={2} className="fw-bold">Our Company Intro</Title>
+          <Title level={5} className="text-uppercase text-warning fw-bold">Welcome to Workhub India 🇮🇳</Title>
+          <Title level={2} className="fw-bold text-dark">Empowering Indian Entrepreneurs</Title>
           <Paragraph className="text-muted fs-5">
-            Workhub provides flexible serviced office space, meeting room rental, virtual office plans,
-            and a range of other business services for individuals and SMEs within Ireland and abroad.
+            Workhub India provides **flexible office spaces**, meeting room rentals, and virtual office plans for **startups, freelancers, and businesses** across the country. Our goal is to **fuel India's entrepreneurial spirit**.
           </Paragraph>
+          <Button 
+            variant="warning" 
+            className="mt-3 px-4 py-2 shadow-sm fw-bold text-dark"
+            onClick={() => document.getElementById("contact-form").scrollIntoView({ behavior: "smooth" })}
+          >
+            Contact Us
+          </Button>
         </Col>
-        <Col md={6}>
+        <Col md={6} className="text-center">
           <img
-            src="/images/ourcompany.jpg"
-            alt="Workhub Team Meeting"
-            className="img-fluid rounded shadow"
+            src="/images/india-office.jpg"
+            alt="Indian Startup Culture"
+            className="img-fluid rounded-4 shadow-lg img-hover-effect"
+            style={{ maxHeight: "350px", objectFit: "cover" }}
           />
         </Col>
       </Row>
 
-      {/* Expert Business Advisors Section */}
-      <Row className="align-items-center mb-5 g-4">
-        <Col md={6}>
-          <img
-            src="/images/business-advisors.jpg"
-            alt="Business Advisors"
-            className="img-fluid rounded shadow"
-          />
+      {/* Success Stories Section */}
+      <Row className="bg-white p-5 rounded-4 shadow-lg mb-5 g-4 animate-fade-in">
+        <Col md={12} className="text-center">
+          <Title level={3} className="fw-bold text-dark">Success Stories</Title>
+          <Paragraph className="text-muted fs-5">Discover how Indian startups thrive with Workhub India.</Paragraph>
         </Col>
+        <Col md={6} className="text-center">
+          <img
+            src="/images/success-story1.jpg"
+            alt="Startup Success"
+            className="img-fluid rounded-4 shadow-lg img-hover-effect"
+            style={{ maxHeight: "350px", objectFit: "cover" }}
+          />
+          <Title level={4} className="mt-3">TechNova</Title>
+          <Paragraph className="text-muted">From a garage startup to a funded tech giant with Workhub India's co-working spaces.</Paragraph>
+        </Col>
+        <Col md={6} className="text-center">
+          <img
+            src="/images/success-story2.jpg"
+            alt="Entrepreneur Growth"
+            className="img-fluid rounded-4 shadow-lg img-hover-effect"
+            style={{ maxHeight: "350px", objectFit: "cover" }}
+          />
+          <Title level={4} className="mt-3">GreenMart</Title>
+          <Paragraph className="text-muted">Expanded to 10 cities in just 2 years with our virtual office plans.</Paragraph>
+        </Col>
+      </Row>
+
+      {/* Contact Form Section */}
+      <Row id="contact-form" className="bg-white p-5 rounded-4 shadow-lg mb-5 g-4 animate-fade-in">
         <Col md={6} className="d-flex flex-column">
-          <Title level={2} className="fw-bold">Expert Business Advisors</Title>
-          <Paragraph className="fw-bold text-dark fs-5">
-            We are a team of dedicated business advisors with a wealth of experience setting up and 
-            operating businesses. We are always on hand to help, whilst staying behind the scenes, 
-            allowing clients to dedicate their full attention to running a successful business.
+          <Title level={3} className="fw-bold text-dark">Get in Touch</Title>
+          <Paragraph className="text-muted fs-5">
+            Have questions? Fill out the form below, and our team will get back to you.
           </Paragraph>
+
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Input name="name" value={formData.name} onChange={handleChange} placeholder="Enter your name" />
+              {errors.name && <div className="text-danger">{errors.name}</div>}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" />
+              {errors.email && <div className="text-danger">{errors.email}</div>}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Message</Form.Label>
+              <Input.TextArea name="message" value={formData.message} onChange={handleChange} placeholder="Enter your message" rows={4} />
+              {errors.message && <div className="text-danger">{errors.message}</div>}
+            </Form.Group>
+
+            <Button variant="warning" type="submit" className="fw-bold text-dark px-4 py-2">
+              Submit Inquiry
+            </Button>
+          </Form>
         </Col>
       </Row>
-
-      {/* Testimonial Section */}
-      <Row className="align-items-center bg-light p-5 rounded shadow mb-5 g-4">
-        <Col md={6} className="d-flex flex-column">
-          <Paragraph className="fst-italic text-dark fs-5">
-            "I am very happy with the office space and the service we receive from the Workhub team. 
-            Any and all problems, which are few in number, are quickly and fully resolved in a friendly 
-            and efficient manner. We have no hesitation in recommending Workhub to our own clients."
-          </Paragraph>
-          <div className="d-flex align-items-center mt-3">
-            <Avatar size={60} icon={<UserOutlined />} className="bg-danger me-3" />
-            <div>
-              <Title level={5} className="mb-0">Andrew Gorby, Managing Director</Title>
-              <Paragraph className="fw-bold text-danger mb-0">IRIS Analytics</Paragraph>
-            </div>
-          </div>
-        </Col>
-        <Col md={6}>
-          <img
-            src="/images/testimonial.jpg"
-            alt="Office Space"
-            className="img-fluid rounded shadow"
-          />
-        </Col>
-      </Row>
-
     </Container>
   );
 };

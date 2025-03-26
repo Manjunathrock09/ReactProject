@@ -22,11 +22,8 @@ const officeDescriptions = {
 const filterOfficeImages = (office) => {
   const description = office.alt_description?.toLowerCase() || "";
   const title = office.description?.toLowerCase() || "";
-
-  // Keywords to exclude (people-related)
   const excludeKeywords = ["person", "people", "man", "woman", "portrait", "face", "human", "team", "group"];
-
-  return !excludeKeywords.some(keyword => description.includes(keyword) || title.includes(keyword));
+  return !excludeKeywords.some((keyword) => description.includes(keyword) || title.includes(keyword));
 };
 
 const ResultsPage = () => {
@@ -44,13 +41,10 @@ const ResultsPage = () => {
       <Row gutter={[16, 16]} justify="center">
         {offices.length > 0 ? (
           offices
-            .filter(filterOfficeImages) // Filter only relevant office images
+            .filter(filterOfficeImages)
             .map((office, index) => {
-              // Get office title & description dynamically
               const officeName = office.alt_description || "Office Space";
               const officeDescription = officeDescriptions[searchQuery.toLowerCase()] || "A beautiful office space.";
-              
-              // Generate Google Maps link based on search query
               const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(searchQuery)}`;
 
               return (
@@ -58,26 +52,36 @@ const ResultsPage = () => {
                   <Card
                     hoverable
                     cover={
-                      <img 
-                        src={office.urls.small} 
-                        alt={officeName} 
-                        className="office-img" 
-                        style={{ height: "220px", objectFit: "cover", borderRadius: "5px" }} 
+                      <img
+                        src={office.urls.small}
+                        alt={officeName}
+                        className="office-img"
+                        style={{ height: "220px", objectFit: "cover", borderRadius: "5px" }}
                       />
                     }
                     className="shadow-sm"
                   >
-                    <Card.Meta 
-                      title={officeName.charAt(0).toUpperCase() + officeName.slice(1)} 
-                      description={<Text type="secondary">{officeDescription}</Text>} 
+                    <Card.Meta
+                      title={officeName.charAt(0).toUpperCase() + officeName.slice(1)}
+                      description={<Text type="secondary">{officeDescription}</Text>}
                     />
-                    
+
                     {/* Buttons Section */}
                     <div className="d-flex justify-content-between mt-3">
                       <Button type="link" href={mapsUrl} target="_blank">
                         View in Maps
                       </Button>
-                      <Button type="primary">
+                      <Button
+                        type="primary"
+                        onClick={() =>
+                          navigate("/payment", {
+                            state: {
+                              plan: officeName,
+                              location: { name: searchQuery, image: office.urls.small },
+                            },
+                          })
+                        }
+                      >
                         Buy Now
                       </Button>
                     </div>

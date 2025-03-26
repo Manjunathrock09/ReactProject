@@ -1,24 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const StorageSolutions = () => {
-  const [showSection, setShowSection] = useState(false);
-
   return (
     <div style={{ backgroundColor: "#f8f9fa" }}>
-      {/* First Section */}
-      <div className="container py-5">
+      {/* First Section - Hero */}
+      <div
+        className="container py-5 rounded"
+        style={{
+          background: "linear-gradient(135deg, #ff6b6b, #f8f9fa)",
+          color: "white",
+          boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <div className="row align-items-center">
           {/* Left Side - Text Content */}
           <div className="col-md-6">
-            <h5 className="text-uppercase text-warning fw-bold">Storage Solutions</h5>
-            <h1 className="fw-bold mt-2 text-dark">
-              Providing top-of-the-line storage solutions for both personal and business use.
+            <h5 className="text-uppercase fw-bold text-warning">Storage Solutions</h5>
+            <h1 className="fw-bold mt-2">
+              India's Most Secure & Affordable Storage Solutions
             </h1>
-            <p className="text-secondary mt-3">
-              Our state-of-the-art storage units come in a variety of sizes, ensuring that we have
-              the perfect unit to meet your needs. With easy access from the M50, secure entry, and
-              competitive prices, you won't find a better storage option than <strong>Storagehub</strong>.
+            <p className="mt-3">
+              Our state-of-the-art storage units come in various sizes, ensuring the perfect space for your needs. With 
+              locations in <strong>Mumbai, Delhi, Bengaluru, and Chennai</strong>, secure access, and competitive pricing, 
+              <strong> Storagehub India</strong> is your best choice.
             </p>
           </div>
 
@@ -28,7 +33,12 @@ const StorageSolutions = () => {
               src="/images/storage-image.webp"
               alt="Storage Facility"
               className="img-fluid rounded shadow-lg"
-              style={{ borderRadius: "15px" }}
+              style={{
+                borderRadius: "15px",
+                transition: "transform 0.3s ease-in-out",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
             />
           </div>
         </div>
@@ -40,35 +50,50 @@ const StorageSolutions = () => {
           {/* Left Side - Image */}
           <div className="col-md-6 text-center">
             <img
-              src="/images/Frame-974.svg"
+              src="/images/students-storage.jpg"
               alt="Storage Lockers"
               className="img-fluid rounded shadow-lg"
-              style={{ borderRadius: "15px" }}
+              style={{
+                borderRadius: "15px",
+                transition: "transform 0.3s ease-in-out",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
             />
           </div>
 
           {/* Right Side - Text Content */}
           <div className="col-md-6">
-            <h5 className="text-uppercase text-danger fw-bold">Storagehub</h5>
-            <h1 className="fw-bold mt-2 text-dark">
-              Welcome to Storagehub, the premier self-storage company in Dublin!
-            </h1>
+            <h5 className="text-uppercase text-danger fw-bold">Storagehub India</h5>
+            <h1 className="fw-bold mt-2">Welcome to India’s Best Self-Storage Company!</h1>
             <p className="text-secondary mt-3">
-              We pride ourselves on providing top-of-the-line storage solutions for both personal
-              and business use. Our storage units come in various sizes, ensuring we have the perfect unit for your needs.
+              We provide world-class storage solutions for homes, businesses, students, and travelers. 
+              Our units come in various sizes, ensuring the perfect space for your needs.
             </p>
 
-            {/* Storage Steps */}
+            {/* Storage Steps with Icons */}
             <div className="row mt-4">
               {[
-                { icon: "📏", title: "Choose your storage unit size", text: "Change size anytime (if available)" },
-                { icon: "📅", title: "Decide your move-in date", text: "Pick a date that suits you" },
-                { icon: "💳", title: "Set up payment to confirm", text: "Cancel for free 24hrs before move-in" },
-                { icon: "🆔", title: "Confirm your identity", text: "Have a passport or driver’s license ready" },
+                { icon: "📏", title: "Choose Your Unit", text: "Sizes from 50 to 500 sq.ft." },
+                { icon: "📅", title: "Pick Move-In Date", text: "Flexible plans for all durations." },
+                { icon: "💳", title: "Easy Online Payment", text: "Affordable plans from ₹2,000/month." },
+                { icon: "🆔", title: "24/7 Secure Access", text: "CCTV, biometric entry, and guards." },
               ].map((step, index) => (
                 <div key={index} className="col-md-6">
                   <p className="d-flex align-items-start">
-                    <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>{step.icon}</span>
+                    <span
+                      style={{
+                        fontSize: "1.5rem",
+                        marginRight: "10px",
+                        background: "#ff6b6b",
+                        color: "white",
+                        padding: "10px",
+                        borderRadius: "50%",
+                        boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.2)",
+                      }}
+                    >
+                      {step.icon}
+                    </span>
                     <span>
                       <b>{step.title}</b>
                       <br />
@@ -78,64 +103,28 @@ const StorageSolutions = () => {
                 </div>
               ))}
             </div>
-
-            {/* Call-to-Action Buttons */}
-            <button
-              className="btn btn-danger rounded-pill px-4 py-2"
-              onClick={() => setShowSection(true)}
-            >
-              Visit Storagehub →
-            </button>
           </div>
-
-          {showSection && (
-            <div className="mt-5 p-4 border rounded shadow-sm bg-light">
-              <div className="row align-items-center">
-                {/* Left Side - Text Content */}
-                <div className="col-md-6">
-                  <h1 className="fw-bold">Dublin’s Best Self Storage Facility</h1>
-                  <p className="text-secondary">
-                    Moving house or need extra space? Running out of room for everything in your office?
-                    Looking for somewhere to store your books and dorm contents over the summer? Whether for home,
-                    student, or business needs, self-storage is the perfect solution.
-                  </p>
-                  <button className="btn btn-warning fw-bold px-4 py-2">
-                    Get a Quote
-                  </button>
-                </div>
-
-                {/* Right Side - Video */}
-                <div className="col-md-6">
-                  <iframe
-                    className="w-100 rounded shadow"
-                    height="300"
-                    src="https://www.youtube.com/embed/PSpSaiMCttE?si=U7ADMNtu6N9fMoZy"
-                    title="Storagehub Video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
       {/* Self Storage for Every Occasion Section */}
       <div className="container py-5">
-        <h2 className="text-center fw-bold mb-4 text-dark">Self Storage for Every Occasion</h2>
+        <h2 className="text-center fw-bold mb-4 text-dark">Storage Solutions for Every Need</h2>
         <div className="row">
           {[
-            { img: "Moving house or business.jpg", title: "Moving house or business", text: "No stress, no contracts, no cancellation fees." },
-            { img: "create-space.jpg", title: "Create space in your life", text: "Perfect for decluttering your home or office." },
-            { img: "students-storage.jpg", title: "Students or going abroad", text: "Affordable units for dorm contents, luggage & boxes." },
+            { img: "moving-house-india.jpg", title: "Moving Home or Office", text: "Flexible plans, no hidden fees." },
+            { img: "declutter-india.jpg", title: "Declutter Your Space", text: "Store furniture, electronics & more." },
+            { img: "student-storage-india.jpg", title: "Student & Travel Storage", text: "Affordable storage for books & luggage." },
           ].map((card, index) => (
             <div key={index} className="col-md-4">
-              <div className="card border-0 shadow-sm hover-shadow">
+              <div
+                className="card border-0 shadow-sm hover-shadow text-center"
+                style={{ transition: "transform 0.3s ease-in-out" }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+                onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              >
                 <img src={`/images/${card.img}`} className="card-img-top rounded" alt={card.title} />
-                <div className="card-body text-center">
+                <div className="card-body">
                   <h5 className="fw-bold">{card.title}</h5>
                   <p className="text-secondary">{card.text}</p>
                 </div>
@@ -147,12 +136,12 @@ const StorageSolutions = () => {
 
       {/* Customer Reviews Section */}
       <div className="container py-5">
-        <h2 className="text-center fw-bold mb-4 text-dark">What Our Customers Are Saying</h2>
+        <h2 className="text-center fw-bold mb-4 text-dark">What Our Customers Say</h2>
         <div className="row">
           {[
-            { name: "Jack Hogan", text: "Ideal location, 24/7 access via app. Brilliant service!", rating: "★★★★★" },
-            { name: "Niall O'Kelly", text: "Great facilities & competitive pricing. Highly recommended!", rating: "★★★★★" },
-            { name: "Maja Ignaczewska", text: "Best storage ever! Martina was fantastic. Highly recommended!", rating: "★★★★★" },
+            { name: "Rahul Sharma", text: "Great service! The Mumbai facility is very secure.", rating: "★★★★★" },
+            { name: "Priya Menon", text: "Affordable storage in Bengaluru. Super convenient!", rating: "★★★★★" },
+            { name: "Vikram Patel", text: "Storagehub made my house shifting stress-free.", rating: "★★★★★" },
           ].map((review, index) => (
             <div key={index} className="col-md-4">
               <div className="card border-0 shadow-sm p-3 bg-light">
@@ -164,16 +153,6 @@ const StorageSolutions = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="d-flex justify-content-center mt-4">
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=Storagehub,Dublin"
-            className="btn btn-outline-danger fw-bold px-4 py-2 shadow-sm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read More Reviews →
-          </a>
         </div>
       </div>
     </div>

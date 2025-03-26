@@ -22,11 +22,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import NotFound from "./pages/NotFound";
-import { auth } from "./firebase/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import ResultsPage from "./pages/ResultsPage"; 
-
+import Payments from "./components/Payments";
 
 const { Content } = Layout;
 
@@ -34,12 +32,11 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
-  // Check authentication status
+  // Placeholder authentication logic
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user);
-    });
-    return () => unsubscribe();
+    // Simulating authentication check (Replace with actual logic if needed)
+    const user = localStorage.getItem("user"); // Example: Checking stored user
+    setIsAuthenticated(!!user);
   }, []);
 
   return (
@@ -53,7 +50,7 @@ const App = () => {
               <Hero /> 
               <Features />
               <WhyWorkhub />
-              <ClientReview/>
+              <ClientReview />
             </>
           } />
           <Route path="/office-space" element={<OfficeSpace />} />
@@ -68,8 +65,7 @@ const App = () => {
           <Route path="/our-company" element={<OurCompany />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/results" element={<ResultsPage />} />
-
-
+          <Route path="payments" element={<Payments />} />
 
           {/* Authentication Pages */}
           <Route path="/login" element={<Login />} />

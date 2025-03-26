@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { login, guestLogin } from "../firebase/auth";
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
 
 const Login = () => {
@@ -9,25 +8,25 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     setError("");
-    try {
-      await login(email, password);
+
+    // Retrieve stored user details
+    const storedEmail = localStorage.getItem("userEmail");
+    const storedPassword = localStorage.getItem("userPassword");
+
+    if (email === storedEmail && password === storedPassword) {
+      localStorage.setItem("isAuthenticated", "true");
       navigate("/");
-    } catch (err) {
-      setError(err.message);
+    } else {
+      setError("Invalid email or password");
     }
   };
 
-  const handleGuestLogin = async () => {
-    setError("");
-    try {
-      await guestLogin();
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-    }
+  const handleGuestLogin = () => {
+    localStorage.setItem("isAuthenticated", "guest");
+    navigate("/");
   };
 
   return (

@@ -2,46 +2,41 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button, Card, Row, Col } from "react-bootstrap";
-import { Tooltip } from "antd";
 import "antd/dist/reset.css";
 
 const locations = [
   {
-    name: "Baggot Street",
-    description: "A fully-serviced modern office building in Dublin.",
-    price: "₹6,550.72 per annum",
-    image: "/images/baggot-street.webp"
+    name: "Connaught Place, Delhi",
+    description: "Premium coworking space in the heart of Delhi with all modern amenities.",
+    price: "₹500 per day",
+    image: "/images/delhi.jpg"
   },
   {
-    name: "Bracken Road",
-    description: "A fully-serviced modern office in Carlisle Business Park, Sandyford.",
-    image: "/images/bracken-road.webp"
+    name: "Indiranagar, Bangalore",
+    description: "A vibrant coworking space in one of Bangalore’s prime locations.",
+    image: "/images/bengaluru.jpg"
   },
   {
-    name: "Fern Road",
-    description: "A fully-serviced modern office in Sandyford Business District.",
-    image: "/images/fernroad.webp"
+    name: "Bandra Kurla Complex, Mumbai",
+    description: "A state-of-the-art business hub in Mumbai’s corporate district.",
+    image: "/images/mumbai.jpg"
   },
   {
-    name: "Camden Street",
-    description: "A bright, airy, refurbished building in Dublin with great transport links.",
-    image: "/images/camden-street.webp"
+    name: "T. Nagar, Chennai",
+    description: "Fully equipped coworking space in Chennai’s commercial hub.",
+    image: "/images/t-nagar.jfif"
+  },
+  {
+    name: "Hitech City, Hyderabad",
+    description: "A modern coworking space in Hyderabad’s major IT and business district.",
+    image: "/images/hyderabad.jpg"
   },
 ];
 
 const CoworkingSpaces = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [showInfoModal, setShowInfoModal] = useState(false);
-  const [infoContent, setInfoContent] = useState(null);
-  
-  const navigate = useNavigate();  // ✅ FIX: Added navigate hook inside the component
-
-  const handleShowMore = (title, description) => {
-    setInfoContent({ title, description });
-    setShowInfoModal(true);
-  };
+  const navigate = useNavigate();
 
   const handleBuyNow = (plan) => {
     setSelectedPlan(plan);
@@ -49,79 +44,62 @@ const CoworkingSpaces = () => {
   };
 
   const handleSelectLocation = (location) => {
-    setSelectedLocation(location);
     setShowModal(false);
-
-    // ✅ FIX: Moved navigate inside function
     navigate("/payment", { state: { plan: selectedPlan, location } });
   };
 
   return (
     <div className="container mt-5">
-      {/* Section 1: Introduction */}
+      {/* Introduction Section */}
       <Row className="align-items-center">
         <Col md={6} className="text-md-start text-center">
-          <h5 className="text-uppercase text-danger fw-bold">Work From Everywhere</h5>
+          <h5 className="text-uppercase text-danger fw-bold">Work From Anywhere</h5>
           <h2 className="fw-bold text-primary">
-            Need a change of scenery now and again? <br />
-            Use a desk in a co-working space in Dublin with a Workhub Day Pass.
+            Looking for a productive workspace? <br />
+            Get access to top coworking spaces across India with Workhub Pass.
           </h2>
           <p className="text-muted">
-            Workhub offers convenient co-working day passes in Dublin, providing access to top-quality 
-            Business Centres for up to 8 hours a day. These passes can be purchased individually 
-            or in bundles of 5, 10, or 20.
+            Workhub provides access to high-quality coworking spaces in major Indian cities. 
+            Choose from flexible plans for individuals and teams, available from 1 day to 1 year.
           </p>
         </Col>
         <Col md={6} className="text-center mt-4 mt-md-0">
-          <Card className="border-0 shadow-lg rounded-3">
-            <img src="/images/coworking-space.png" alt="Coworking Space" className="img-fluid rounded" />
+          <Card className="border-0 shadow-lg rounded-3 overflow-hidden">
+            <img src="/images/coworking-space.jpg" alt="Coworking Space" className="img-fluid" />
           </Card>
         </Col>
       </Row>
 
-      {/* Section 2: Plans and Prices */}
+      {/* Plans Section */}
       <div className="text-center mt-5">
-        <h5 className="text-uppercase text-danger fw-bold">CO-WORKING</h5>
-        <h2 className="fw-bold text-primary">Co-Working Plans and Prices</h2>
-        <p className="text-muted">
-          Our 4 virtual office plans have been carefully created to meet a range of business 
-          requirements. If you need advice about which plan to choose, please contact us.
-        </p>
+        <h5 className="text-uppercase text-danger fw-bold">CO-WORKING PLANS</h5>
+        <h2 className="fw-bold text-primary">Choose a Plan That Suits You</h2>
       </div>
 
-      {/* Plans */}
       <Row className="mt-4 g-4">
-        {/* Co-Working Day Pass */}
-        <Col md={6}>
-          <Card className="p-4 border-0 shadow-lg rounded-4">
+        {/* Day Pass */}
+        <Col md={6} className="d-flex align-items-stretch">
+          <Card className="p-4 border-0 shadow-lg rounded-4 w-100">
             <h6 className="text-danger text-uppercase">CO-WORKING</h6>
-            <h4 className="fw-bold text-primary">Co-Working Day Pass</h4>
-            <p>Individuals can access coworking space at one of our locations for up to 8 hours a day. From 1 to 60 days.</p>
-            <p className="fw-bold text-muted">FROM</p>
-            <h3 className="text-danger fw-bold">₹6,550.72<span className="fs-6">/ day + VAT</span></h3>
-            <div className="d-flex gap-3 mt-3">
-              <Tooltip title="Get more details">
-                <Button variant="outline-dark" onClick={() => handleShowMore("Co-Working Day Pass", "Individuals can access coworking space at one of our locations for up to 8 hours a day. From 1 to 60 days.")}>Know more</Button>
-              </Tooltip>
-              <Button variant="dark" onClick={() => handleBuyNow("Co-Working Day Pass")}>Buy now</Button>
-            </div>
+            <h4 className="fw-bold text-primary">Day Pass</h4>
+            <p>Access a coworking space for a day. Ideal for freelancers and remote workers.</p>
+            <h3 className="text-danger fw-bold">₹500<span className="fs-6">/ day</span></h3>
+            <Button variant="dark" className="mt-3 w-100" onClick={() => handleBuyNow("Day Pass")}>
+              Buy Now
+            </Button>
           </Card>
         </Col>
 
-        {/* Dedicated Desk Plan */}
-        <Col md={6}>
-          <Card className="p-4 border-0 shadow-lg rounded-4">
+        {/* Dedicated Desk */}
+        <Col md={6} className="d-flex align-items-stretch">
+          <Card className="p-4 border-0 shadow-lg rounded-4 w-100">
             <h6 className="text-danger text-uppercase">CO-WORKING</h6>
-            <h4 className="fw-bold text-primary">Dedicated Desk Plan</h4>
-            <p>Fixed Desk in an open-plan office. Use of all facilities within the selected location. From 3 months to 1 year.</p>
-            <p className="fw-bold text-muted">FROM</p>
-            <h3 className="text-danger fw-bold">₹9,966.65<span className="fs-6">/ 3 months + VAT</span></h3>
-            <div className="d-flex gap-3 mt-3">
-              <Tooltip title="Get more details">
-                <Button variant="outline-dark" onClick={() => handleShowMore("Dedicated Desk Plan", "Fixed Desk in an open-plan office. Use of all facilities within the selected location. From 3 months to 1 year.")}>Know more</Button>
-              </Tooltip>
-              <Button variant="dark" onClick={() => handleBuyNow("Dedicated Desk Plan")}>Buy now</Button>
-            </div>
+            <h4 className="fw-bold text-primary">Dedicated Desk</h4>
+            <p>A fixed desk in a shared workspace. Perfect for teams and individuals needing a consistent workspace.</p>
+            <h3 className="text-danger fw-bold">₹800<span className="fs-6">/ day</span></h3>
+            <Button variant="dark" className="mt-3 w-100" onClick={() => handleBuyNow("Dedicated Desk")}>
+              Buy Now
+            </Button>
           </Card>
         </Col>
       </Row>
@@ -132,16 +110,16 @@ const CoworkingSpaces = () => {
           <Modal.Title>Select a Location</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Please select a location for your {selectedPlan}:</p>
+          <p>Select a location for your {selectedPlan}:</p>
           {locations.map((location, index) => (
-            <Card key={index} className="mb-3 p-2 border shadow-sm rounded-3">
+            <Card key={index} className="mb-3 p-3 border shadow-sm rounded-3">
               <Row className="align-items-center">
                 <Col xs={3}>
                   <img src={location.image} alt={location.name} className="img-fluid rounded-2" />
                 </Col>
                 <Col xs={6}>
-                  <h6 className="fw-bold">{location.name}</h6>
-                  <p className="mb-1 text-muted">{location.description}</p>
+                  <h6 className="fw-bold mb-1">{location.name}</h6>
+                  <p className="text-muted small mb-0">{location.description}</p>
                 </Col>
                 <Col xs={3} className="text-end">
                   <Button variant="primary" size="sm" onClick={() => handleSelectLocation(location)}>Select</Button>

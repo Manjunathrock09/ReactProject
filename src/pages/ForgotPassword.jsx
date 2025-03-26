@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { auth } from "../firebase/firebaseConfig"; // Ensure correct Firebase import
-import { sendPasswordResetEmail } from "firebase/auth";
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
 
 const ForgotPassword = () => {
@@ -8,16 +6,16 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const handleReset = async (e) => {
+  const handleReset = (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
 
-    try {
-      await sendPasswordResetEmail(auth, email);
-      setMessage("Check your email for reset instructions.");
-    } catch (err) {
-      setError("Error: " + err.message);
+    // Mock password reset logic
+    if (email) {
+      setMessage("If this email is registered, you will receive reset instructions.");
+    } else {
+      setError("Please enter a valid email.");
     }
   };
 

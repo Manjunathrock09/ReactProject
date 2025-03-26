@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { signUp } from "../firebase/auth";
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
 
 const Signup = () => {
@@ -9,15 +8,15 @@ const Signup = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
     setError("");
-    try {
-      await signUp(email, password);
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-    }
+
+    // Store the user details in localStorage
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userPassword", password);
+
+    navigate("/login"); // Redirect to login after signup
   };
 
   return (
